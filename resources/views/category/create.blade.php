@@ -1,0 +1,29 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <h1>Create a course</h1>
+        <form action="{{ route('category.store') }}" method="POST">
+            @csrf
+            <div class="input-container">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+
+                <div>
+                    <label for="name" required>Name</label>
+                    <input type="text" name="name" id="" value="{{ old('name') }}">
+                    @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div>
+                    <input type="submit" value="Create">
+                </div>
+            </div>
+        </form>
+    </div>
+@endsection
