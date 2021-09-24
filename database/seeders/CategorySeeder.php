@@ -14,16 +14,16 @@ class CategorySeeder extends Seeder
      */
     protected $categories = [
         [
-            'name' => 'Starch'
+            'name' => 'starch'
         ],
         [
-            'name' => 'Meat'
+            'name' => 'meat'
         ],
         [
-            'name' => 'Vegetable'
+            'name' => 'vegetable'
         ],
         [
-            'name' => 'Beverage'
+            'name' => 'beverage'
         ],
     ];
 

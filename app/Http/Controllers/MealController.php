@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Meal;
 use App\Models\MealType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MealController extends Controller
 {
     public function index()
     {
-        $types = MealType::all();
-        return view('type.index', ['types' => $types]);
+        $meals = Meal::all();
+
+        $users = User::with('meal.mealType.category')->get();
+        return view('meal.index', ['users' => $users, 'meals' => $meals]);
     }
 
     public function create()
@@ -24,16 +28,28 @@ class MealController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'cat_id' => 'required',
+        $validated = $request->validate([
+            'starch' => 'required',
+            'meat' => 'required',
+            'vegetable' => 'required',
+            'beverage' => 'required',
+            'meal_date' => 'required',
         ]);
 
-        MealType::create([
-            'name' => $request->name,
-            'cat_id' => $request->cat_id,
-        ]);
 
-        return redirect(route('type.index'));
+        $categories = Category::all();
+        foreach ($validated as $key => $value) {
+            foreach ($categories as $category) {
+                if ($key == $category->name) {
+                    Meal::create([
+                        'user_id' => auth()->user()->id,
+                        'meal_type_id' => $value,
+                        'meal_date' => $request->meal_date
+                    ]);
+                }
+            }
+        }
+
+        return redirect(route('meal.index'));
     }
 }

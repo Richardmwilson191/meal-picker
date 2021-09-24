@@ -23,7 +23,7 @@ Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['roles'])->group(function () {
+Route::middleware(['auth', 'roles'])->group(function () {
     Route::get('category', [CatController::class, 'index'])->name('category.index');
     Route::get('category/create', [CatController::class, 'create'])->name('category.create');
     Route::post('category/store', [CatController::class, 'store'])->name('category.store');
@@ -31,8 +31,8 @@ Route::middleware(['roles'])->group(function () {
     Route::get('type', [MealTypeController::class, 'index'])->name('type.index');
     Route::get('type/create', [MealTypeController::class, 'create'])->name('type.create');
     Route::post('type/store', [MealTypeController::class, 'store'])->name('type.store');
-});
 
-Route::get('meal', [MealController::class, 'index'])->name('meal.index');
-Route::get('meal/create', [MealController::class, 'create'])->name('meal.create');
-Route::post('meal/store', [MealController::class, 'store'])->name('meal.store');
+    Route::get('meal', [MealController::class, 'index'])->name('meal.index');
+    Route::get('meal/create', [MealController::class, 'create'])->name('meal.create');
+    Route::post('meal/store', [MealController::class, 'store'])->name('meal.store');
+});

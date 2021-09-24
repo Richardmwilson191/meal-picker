@@ -9,17 +9,17 @@ class Meal extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'meal_type_id', 'meal_date'];
+    protected $fillable = ['user_id', 'meal_type_id', 'meal_date'];
 
     public function setMealDateAttribute($value)
     {
         $this->attributes['meal_date'] = date_create($value);
     }
 
-    public function getMealDateAttribute($value)
-    {
-        $this->attributes['meal_date'] = date_format($value, 'jS F Y');
-    }
+    // public function getMealDateAttribute($value)
+    // {
+    //     $this->attributes['meal_date'] = date('jS F Y', strtotime($value));
+    // }
 
     public function user()
     {
@@ -33,6 +33,6 @@ class Meal extends Model
 
     public function mealType()
     {
-        return $this->hasMany(MealType::class);
+        return $this->belongsTo(MealType::class, 'meal_type_id');
     }
 }
