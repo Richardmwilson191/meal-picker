@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
+            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-lg">
 
                 <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
                     Dashboard
@@ -29,9 +29,12 @@
 
                 @if (auth()->user()->role === 'student')
                     <div class="w-full p-6">
-                        <a href="{{ route('meal.create') }}">Create meal</a>
-                    </div>
+                        <button
+                            class="inline-flex items-center text-white px-5 py-2 rounded-lg overflow-hidden focus:outline-none bg-indigo-500 hover:bg-indigo-600 font-semibold tracking-tight"
+                            onclick="Livewire.emit('openModal', 'meal-choice-component')">Select Meal Choice</button>
 
+                        @livewire('livewire-ui-modal')
+                    </div>
                 @endif
             </section>
         </div>

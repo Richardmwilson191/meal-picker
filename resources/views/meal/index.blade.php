@@ -26,4 +26,7 @@
 
         </table>
     </div>
+    <div>
+        {{ Auth::user()->meal }}
+    </div>
 @endsection

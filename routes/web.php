@@ -3,6 +3,7 @@
 use App\Http\Controllers\CatController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\MealTypeController;
+use App\Http\Livewire\MealChoiceComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,5 @@ Route::middleware(['auth', 'roles'])->group(function () {
     Route::get('meal', [MealController::class, 'index'])->name('meal.index');
     Route::get('meal/create', [MealController::class, 'create'])->name('meal.create');
     Route::post('meal/store', [MealController::class, 'store'])->name('meal.store');
+    // Route::post('store', [MealChoiceComponent::class, 'store'])->name('store');
 });
